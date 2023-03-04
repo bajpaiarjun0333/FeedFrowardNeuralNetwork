@@ -250,7 +250,7 @@ def adam(x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta1,beta2,activa
     mt_b.append(temp)
     vt_b.append(temp2)
 
-  epsilon=1e-2
+  epsilon=1e-10
   t=0
   for i in range(int(iter)):
     for j in range(len(data)):
@@ -338,7 +338,7 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
   #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
   #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
   print("Adam Optimizer")
-  adam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.99,'tanh','cross_entropy')
+  Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'tanh','cross_entropy')
   print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'tanh')))
   print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'tanh')))
 
