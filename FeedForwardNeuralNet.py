@@ -319,7 +319,7 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
   w,b=make_layer(w,b,128,128,'random')
   w,b=make_layer(w,b,128,10,'random')
   l=len(w)
-  iter=10
+  iter=20
   # print("Batch Gradient Descent: ")
   # batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'sigmoid','cross_entropy')
   # print("Batch Gradient Descent: ")
