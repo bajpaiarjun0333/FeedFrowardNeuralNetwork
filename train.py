@@ -1,6 +1,7 @@
 import numpy as np 
 import pandas as pd
 import math
+from sklearn.model_selection import train_test_split
 
 #dataset loading 
 from keras.datasets import fashion_mnist
@@ -9,6 +10,9 @@ x_train=x_train.reshape(x_train.shape[0],(x_train.shape[1]*x_train.shape[2]))
 x_test=x_test.reshape(x_test.shape[0],(x_test.shape[1]*x_test.shape[2]))
 x_train=x_train/255
 x_test=x_test/255
+#create validation set also
+x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.1, random_state=0)
+
 
 
 
@@ -20,6 +24,9 @@ class NeuralNetwork:
         self.h=[]
         self.wd=[]
         self.ad=[]
+        self.hd=[]
+        self.bd=[]
+        
     
     def activations(self,activation,z):
         if activation=='sigmoid':
@@ -33,8 +40,8 @@ class NeuralNetwork:
                 sum=0
                 for j in range(z.shape[1]):
                     sum=sum+np.exp(z[i][j])
-            z[i]=np.exp(z[i])/sum
-        return z
+                z[i]=np.exp(z[i])/sum
+            return z
     
     def activations_derivative(self,activation,z):
         if activation=='sigmoid':
@@ -45,7 +52,7 @@ class NeuralNetwork:
             y=(np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))
             return 1-np.square(y)
         
-    def loss_function(loss_fn,yhat,y_train):
+    def loss_function(self,loss_fn,yhat,y_train):
         if loss_fn=='cross_entropy':
             sum=0
             for i in range(y_train.shape[0]):
@@ -55,41 +62,47 @@ class NeuralNetwork:
             return (yhat-y_train)**2
 
 
-    def make_layer(self,w,b,input,output,initialization):
+    def make_layers(self,no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes):
+        layer=[]
+        layer.append(input_neuron)
+        for i in range(no_of_hidden_layers):
+            layer.append(no_of_neuron)
+        layer.append(no_of_classes)
         if initialization=='random':
-            weights=np.random.uniform(-1,1,(input,output))
-            bias=np.random.uniform(-1,1,(1,output))
-            self.w.append(weights)
-            self.b.append(bias)
+            for i in range(no_of_hidden_layers+1):
+                weights=np.random.uniform(-1,1,(layer[i],layer[i+1]))
+                bias=np.random.uniform(-1,1,(1,layer[i+1]))
+                self.w.append(weights)
+                self.b.append(bias)
         if initialization=='xavier':
-            n=np.sqrt(6/(input+output))
-            wweights=np.random.uniform(-n,n,(input,output))
-            bias=np.random.uniform(-n,n,(1,output))
-            self.w.append(weights)
-            self.b.append(bias)
+            for i in range(no_of_hidden_layers+1):
+                n=np.sqrt(6/(layer[i]+layer[i+1]))
+                weights=np.random.uniform(-n,n,(layer[i],layer[i+1]))
+                bias=np.random.uniform(-n,n,(1,layer[i+1]))
+                self.w.append(weights)
+                self.b.append(bias)
 
-    def forward_pass(self,x,w,b,activation):
-        a=[]
-        h=[]
+    def forward_pass(self,x,activation):
+        self.a=[]
+        self.h=[]
         temp=x
-        l=len(w)
+        l=len(self.w)
         for i in range (l-1):
-            a1=np.add(np.matmul(temp,w[i]),b[i])
+            a1=np.add(np.matmul(temp,self.w[i]),self.b[i])
             h1=self.activations(activation,a1)
-            a.append(a1)
-            h.append(h1)
+            self.a.append(a1)
+            self.h.append(h1)
             temp=h1
-        a1=np.add(np.matmul(temp,w[l-1]),b[l-1])
+        a1=np.add(np.matmul(temp,self.w[l-1]),self.b[l-1])
         h1=self.activations('softmax',a1)
-        a.append(a1)
-        h.append(h1)
-        return (a,h)
+        self.a.append(a1)
+        self.h.append(h1)
     
-    def backward_pass(self,w,b,a,h,yhat,y_train,x_train,no_of_classes,activation):
-        wd=[]
-        bd=[]
-        ad=[]
-        hd=[]
+    def backward_pass(self,yhat,y_train,x_train,no_of_classes,activation):
+        self.wd=[]
+        self.bd=[]
+        self.ad=[]
+        self.hd=[]
         el=np.zeros((y_train.shape[0],no_of_classes))
         for i in range (y_train.shape[0]):
             el[i][y_train[i]]=1
@@ -100,29 +113,29 @@ class NeuralNetwork:
 
         hd1=-(el/yhatl)
         ad1=-(el-yhat)
-        hd.append(hd1)
-        ad.append(ad1)
-        l=len(w)
+        self.hd.append(hd1)
+        self.ad.append(ad1)
+        l=len(self.w)
         for i in range(l-1,-1,-1):
-            q=h[i-1].T
+            q=self.h[i-1].T
             if i==0:
                 q=x_train.T
-            wi=np.matmul(q,ad[len(ad)-1])/x_train.shape[0]
-            bi=np.sum(ad[len(ad)-1],axis=0)/x_train.shape[0]
+            wi=np.matmul(q,self.ad[len(self.ad)-1])/x_train.shape[0]
+            bi=np.sum(self.ad[len(self.ad)-1],axis=0)/x_train.shape[0]
             if i!=0:
-                hd1=np.matmul(ad[len(ad)-1],w[i].T)
-                der=self.activations_derivative(activation,a[i-1])
+                hd1=np.matmul(self.ad[len(self.ad)-1],self.w[i].T)
+                der=self.activations_derivative(activation,self.a[i-1])
                 ad1=np.multiply(hd1,der)
-                hd.append(hd1)
-                ad.append(ad1)
-            wd.append(wi)
-            bd.append(bi)
-        return (wd,bd)
+                self.hd.append(hd1)
+                self.ad.append(ad1)
+            self.wd.append(wi)
+            self.bd.append(bi)
+        
     
-    def accuracy(self,x_test,y_test,w,b,activation):
-        a,h=self.forward_pass(x_test,w,b,activation)
-        l=len(w)
-        ypred=np.argmax(h[l-1],axis=1)
+    def accuracy(self,x_test,y_test,activation):
+        self.forward_pass(x_test,activation)
+        l=len(self.w)
+        ypred=np.argmax(self.h[l-1],axis=1)
         count=0
         for i in range(y_test.shape[0]):
             if ypred[i]!=y_test[i]:
@@ -144,155 +157,144 @@ class NeuralNetwork:
             ans.append(batch_ans)
         return data,ans
     
-    def onePass(self,x_train,y_train,no_of_classes,w,b,l,n,activation):
-        a,h=self.forward_pass(x_train,w,b,activation)
-        wd,bd=self.backward_pass(w,b,a,h,h[l-1],y_train,x_train,no_of_classes,activation)
-        return (wd,bd)
+    def onePass(self,x_train,y_train,no_of_classes,l,n,activation):
+        self.forward_pass(x_train,activation)
+        self.backward_pass(self.h[l-1],y_train,x_train,no_of_classes,activation)
     
-    def batchGrad(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,activation,loss_fn):
+    def batch(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         for i in range(iter):
             h=None
             for j in range(len(data)):
-                wd,bd=self.onePass(data[j],ans[j],no_of_classes,w,b,l,n,activation)
+                self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
                 for j in range (l):
-                    w[j]=w[j]-n*wd[l-1-j]
-                    b[j]=b[j]-n*bd[l-1-j]
-        a=[]
-        h=[]
-        a,h=self.forward_pass(x_train,w,b,activation)
-        loss=self.loss_function(loss_fn,h[l-1],y_train)
-        print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
+                    self.w[j]=self.w[j]-n*self.wd[l-1-j]
+                    self.b[j]=self.b[j]-n*self.bd[l-1-j]
 
-    def momentumGradientDescent(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta,activation,loss_fn):
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
+            
+
+    def momentum(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
         data,ans=self.createBatches(x_train,y_train,batchSize)
   
         moment=[]
         momentB=[]
         for i in range(l):
-            temp=np.zeros((w[i].shape))
-            temp2=np.zeros(b[i].shape)
+            temp=np.zeros((self.w[i].shape))
+            temp2=np.zeros(self.b[i].shape)
             moment.append(temp)
             momentB.append(temp2)
 
         for i in range(iter):
             for j in range(len(data)):
-                wd,bd=self.onePass(data[j],ans[j],no_of_classes,w,b,l,n,activation)
+                self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
                 for k in range (l):
-                    moment[k]=(moment[k]*beta)+wd[l-1-k]
-                    momentB[k]=(momentB[k]*beta)+bd[l-1-k]
-                    w[k]=w[k]-n*moment[k]
-                    b[k]=b[k]-n*momentB[k]
+                    moment[k]=(moment[k]*beta)+self.wd[l-1-k]
+                    momentB[k]=(momentB[k]*beta)+self.bd[l-1-k]
+                    self.w[k]=self.w[k]-n*moment[k]
+                    self.b[k]=self.b[k]-n*momentB[k]
   
-        a,h=self.forward_pass(x_train,w,b,activation)
-        loss=self.loss_function(loss_fn,h[l-1],y_train)
-        print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
-
-    def nsGradientDescent(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta,activation,loss_fn):
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
+            
+    def nestrov(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         moment=[]
         momentB=[]
         for i in range(l):
-            temp=np.zeros((w[i].shape))
-            temp2=np.zeros((b[i].shape))
+            temp=np.zeros((self.w[i].shape))
+            temp2=np.zeros((self.b[i].shape))
             moment.append(temp)
             momentB.append(temp2)
     
         for i in range(iter):
             for j in range(len(data)):
                 for k in range(l):
-                    w[k]=w[k]-beta*moment[k]
-                    b[k]=b[k]-beta*momentB[k]
-                wd,bd=self.onePass(data[k],ans[k],no_of_classes,w,b,l,n,activation)
+                    self.w[k]=self.w[k]-beta*moment[k]
+                    self.b[k]=self.b[k]-beta*momentB[k]
+                self.onePass(data[k],ans[k],no_of_classes,l,n,activation)
                 for k in range (l):
-                    moment[k]=beta*moment[k]+n*wd[l-1-k]
-                    momentB[k]=beta*momentB[k]+n*bd[l-1-k]
-                    w[k]=w[k]-moment[k]
-                    b[k]=b[k]-momentB[k]
+                    moment[k]=beta*moment[k]+n*self.wd[l-1-k]
+                    momentB[k]=beta*momentB[k]+n*self.bd[l-1-k]
+                    self.w[k]=self.w[k]-moment[k]
+                    self.b[k]=self.b[k]-momentB[k]
       
-        a,h=self.forward_pass(x_train,w,b,activation)
-        loss=self.loss_function(loss_fn,h[l-1],y_train)
-        print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
-
-    def rmsProp(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta,activation,loss_fn):
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
+            
+    def rmsProp(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         momentW=[]
         momentB=[]
         for i in range(l):
-            temp=np.zeros((w[i].shape))
-            temp2=np.zeros((b[i].shape))
+            temp=np.zeros((self.w[i].shape))
+            temp2=np.zeros((self.b[i].shape))
             momentW.append(temp)
             momentB.append(temp2)
 
         epsilon=1e-8
         for i in range(int(iter)):
             for j in range(len(data)):
-                wd,bd=self.onePass(data[j],ans[j],no_of_classes,w,b,l,n,activation)
+                self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
                 for k in range (l):
-                    momentW[k]=(momentW[k]*beta)+(1-beta)*np.square(wd[l-1-k])
-                    momentB[k]=(momentB[k]*beta)+(1-beta)*np.square(bd[l-1-k])
-                    w[k]=w[k]-(n/np.sqrt(np.linalg.norm(momentW[k]+epsilon)))*wd[l-1-k]
-                    b[k]=b[k]-(n/np.sqrt(np.linalg.norm(momentB[k]+epsilon)))*bd[l-1-k]
+                    momentW[k]=(momentW[k]*beta)+(1-beta)*np.square(self.wd[l-1-k])
+                    momentB[k]=(momentB[k]*beta)+(1-beta)*np.square(self.bd[l-1-k])
+                    self.w[k]=self.w[k]-(n/np.sqrt(np.linalg.norm(momentW[k]+epsilon)))*self.wd[l-1-k]
+                    self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(momentB[k]+epsilon)))*self.bd[l-1-k]
   
-        a,h=self.forward_pass(x_train,w,b,activation)
-        loss=self.loss_function(loss_fn,h[l-1],y_train)
-        print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
-
-    def adam(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta1,beta2,activation,loss_fn):
-        data,ans=self.createBatches(x_train,y_train,batchSize)
-
-        mt_w=[]
-        vt_w=[]
-        mt_b=[]
-        vt_b=[]
-        for i in range(l):
-            temp=np.zeros((w[i].shape))
-            temp2=np.zeros((w[i].shape))
-            mt_w.append(temp)
-            vt_w.append(temp2)
-            temp=np.zeros((b[i].shape))
-            temp2=np.zeros((b[i].shape))
-            mt_b.append(temp)
-            vt_b.append(temp2)
-
-        epsilon=1e-10
-        t=0
-        for i in range(int(iter)):
-            for j in range(len(data)):
-                t=t+1
-                wd,bd=self.onePass(data[j],ans[j],no_of_classes,w,b,l,n,activation)
-                for k in range (l):
-                    mt_w[k]=(mt_w[k]*beta1)+(1-beta1)*wd[l-1-k]
-                    mt_w_hat=mt_w[k]/(1-beta1**t)
-                    vt_w[k]=(vt_w[k]*beta2)+(1-beta2)*np.square(wd[l-1-k])
-                    vt_w_hat=vt_w[k]/(1-beta2**t)
-                    mt_b[k]=(mt_b[k]*beta1)+(1-beta1)*bd[l-1-k]
-                    mt_b_hat=mt_b[k]/(1-beta1**t)
-                    vt_b[k]=(vt_b[k]*beta2)+(1-beta2)*np.square(bd[l-1-k])
-                    vt_b_hat=vt_b[k]/(1-beta2**t)
-                    w[k]=w[k]-(n/np.sqrt(np.linalg.norm(vt_w_hat+epsilon)))*mt_w_hat
-                    b[k]=b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*mt_b_hat
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-            a,h=self.forward_pass(x_train,w,b,activation)
-            loss=self.loss_function(loss_fn,h[l-1],y_train)
-            print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
-
-    def Nadam(self,x_train,y_train,no_of_classes,w,b,l,iter,n,batchSize,beta1,beta2,activation,loss_fn):
+    def adam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn):
         data,ans=self.createBatches(x_train,y_train,batchSize)
+
         mt_w=[]
         vt_w=[]
         mt_b=[]
         vt_b=[]
         for i in range(l):
-            temp=np.zeros((w[i].shape))
-            temp2=np.zeros((w[i].shape))
+            temp=np.zeros((self.w[i].shape))
+            temp2=np.zeros((self.w[i].shape))
             mt_w.append(temp)
             vt_w.append(temp2)
-            temp=np.zeros((b[i].shape))
-            temp2=np.zeros((b[i].shape))
+            temp=np.zeros((self.b[i].shape))
+            temp2=np.zeros((self.b[i].shape))
             mt_b.append(temp)
             vt_b.append(temp2)
 
@@ -301,65 +303,94 @@ class NeuralNetwork:
         for i in range(int(iter)):
             for j in range(len(data)):
                 t=t+1
-                wd,bd=self.onePass(data[j],ans[j],no_of_classes,w,b,l,n,activation)
+                self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
                 for k in range (l):
-                    mt_w[k]=(mt_w[k]*beta1)+(1-beta1)*wd[l-1-k]
+                    mt_w[k]=(mt_w[k]*beta1)+(1-beta1)*self.wd[l-1-k]
                     mt_w_hat=mt_w[k]/(1-beta1**t)
-                    vt_w[k]=(vt_w[k]*beta2)+(1-beta2)*np.square(wd[l-1-k])
+                    vt_w[k]=(vt_w[k]*beta2)+(1-beta2)*np.square(self.wd[l-1-k])
                     vt_w_hat=vt_w[k]/(1-beta2**t)
-                    mt_b[k]=(mt_b[k]*beta1)+(1-beta1)*bd[l-1-k]
+                    mt_b[k]=(mt_b[k]*beta1)+(1-beta1)*self.bd[l-1-k]
                     mt_b_hat=mt_b[k]/(1-beta1**t)
-                    vt_b[k]=(vt_b[k]*beta2)+(1-beta2)*np.square(bd[l-1-k])
+                    vt_b[k]=(vt_b[k]*beta2)+(1-beta2)*np.square(self.bd[l-1-k])
                     vt_b_hat=vt_b[k]/(1-beta2**t)
-                    w[k]=w[k]-(n/np.sqrt(np.linalg.norm(vt_w_hat+epsilon)))*(beta1*mt_w_hat+(((1-beta1)*wd[l-1-k])/(1-beta1**t)))
-                    b[k]=b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*(beta1*mt_b_hat+(((1-beta1)*bd[l-1-k])/(1-beta1**t)))
+                    self.w[k]=self.w[k]-(n/np.sqrt(np.linalg.norm(vt_w_hat+epsilon)))*mt_w_hat
+                    self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*mt_b_hat
+            
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
+            
+    def Nadam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn):
+        data,ans=self.createBatches(x_train,y_train,batchSize)
+        mt_w=[]
+        vt_w=[]
+        mt_b=[]
+        vt_b=[]
+        for i in range(l):
+            temp=np.zeros((self.w[i].shape))
+            temp2=np.zeros((self.w[i].shape))
+            mt_w.append(temp)
+            vt_w.append(temp2)
+            temp=np.zeros((self.b[i].shape))
+            temp2=np.zeros((self.b[i].shape))
+            mt_b.append(temp)
+            vt_b.append(temp2)
+
+        epsilon=1e-10
+        t=0
+        for i in range(int(iter)):
+            for j in range(len(data)):
+                t=t+1
+                self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
+                for k in range (l):
+                    mt_w[k]=(mt_w[k]*beta1)+(1-beta1)*self.wd[l-1-k]
+                    mt_w_hat=mt_w[k]/(1-beta1**t)
+                    vt_w[k]=(vt_w[k]*beta2)+(1-beta2)*np.square(self.wd[l-1-k])
+                    vt_w_hat=vt_w[k]/(1-beta2**t)
+                    mt_b[k]=(mt_b[k]*beta1)+(1-beta1)*self.bd[l-1-k]
+                    mt_b_hat=mt_b[k]/(1-beta1**t)
+                    vt_b[k]=(vt_b[k]*beta2)+(1-beta2)*np.square(self.bd[l-1-k])
+                    vt_b_hat=vt_b[k]/(1-beta2**t)
+                    self.w[k]=self.w[k]-(n/np.sqrt(np.linalg.norm(vt_w_hat+epsilon)))*(beta1*mt_w_hat+(((1-beta1)*self.wd[l-1-k])/(1-beta1**t)))
+                    self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*(beta1*mt_b_hat+(((1-beta1)*self.bd[l-1-k])/(1-beta1**t)))
   
-        a,h=self.forward_pass(x_train,w,b,activation)
-        loss=self.loss_function(loss_fn,h[l-1],y_train)
-        print("Iteration Number: "+str(i)+" loss: "+str(loss/x_train.shape[0]))
-
-    def architecture(self,x_train,y_train,x_test,y_test,no_of_classes):
-        w=[]
-        b=[]
-        w,b=self.make_layer(w,b,784,128,'xavier')
-        w,b=self.make_layer(w,b,128,128,'xavier')
-        w,b=self.make_layer(w,b,128,128,'xavier')
-        w,b=self.make_layer(w,b,128,10,'xavier')
-        l=len(w)
-        iter=8
-        # print("Batch Gradient Descent: ")
-        # batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'sigmoid','cross_entropy')
-        # print("Batch Gradient Descent: ")
-        # print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
-        # print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-        #print("Momentum Gradient Descent: ")
-        #momentumGradientDescent(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
-        #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
-        #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-        #print("Starting of Nestrov Gradient Descent: ")
-        #nsGradientDescent(x_train,y_train,no_of_classes,w,b,l,iter,0.01,2048,0.9,'sigmoid','cross_entropy')
-        #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
-        #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-        #print("RMS Prop")
-        #rmsProp(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
-        #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
-        #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-        print("NAdam Optimizer")
-        self.Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'tanh','cross_entropy')
-        print("Train Accuracy: ",str(self.accuracy(x_train,y_train,w,b,'tanh')))
-        print("Test Accuracy: ",str(self.accuracy(x_test,y_test,w,b,'tanh')))
-
-        self.architecture(x_train,y_train,x_test,y_test,10)
+            self.forward_pass(x_train,activation)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)/x_train.shape[0]
+            self.forward_pass(x_val,activation)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)/x_val.shape[0]
+            acc_train=self.accuracy(x_train,y_train,activation)
+            acc_val=self.accuracy(x_val,y_val,activation)
+            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
+            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
+            print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
+            
+    def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter):
+        self.w=[]
+        self.b=[]
+        self.make_layers(no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes)
+        l=len(self.w)
+        if optimizer=="batch":
+            self.batch(x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn)
+        if optimizer=='momentum':
+            self.momentum(x_train,y_train,no_of_classes,l,iter,n,batchSize,0.9,activation,loss_fn)
+        if optimizer=='nestrov':
+            self.nestrov(x_train,y_train,no_of_classes,l,iter,n,batchSize,0.9,activation,loss_fn)
+        if optimizer=='rmsProp':
+            self.rmsProp(x_train,y_train,no_of_classes,l,iter,n,batchSize,0.9,activation,loss_fn)
+        if optimizer=='adam':
+            self.adam(x_train,y_train,no_of_classes,l,iter,n,batchSize,0.9,0.999,activation,loss_fn)
+        if optimizer=='Nadam':
+            self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,0.9,0.999,activation,loss_fn)
 
 
 
-
-
-
-
-
-
-
-
-
-
+obj=NeuralNetwork()
+obj.architecture(x_train,y_train,x_test,y_test,10,3,128,784,32,'xavier','cross_entropy','tanh','Nadam',0.01,5)
