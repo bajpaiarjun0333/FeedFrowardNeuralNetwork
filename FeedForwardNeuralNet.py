@@ -59,6 +59,13 @@ def make_layer(w,b,input,output,initialization):
     w.append(weights)
     b.append(bias)
     return (w,b)
+  if initialization=='xavier':
+    n=np.sqrt(6/(input+output))
+    weights=np.random.uniform(-n,n,(input,output))
+    bias=np.random.uniform(-n,n,(1,output))
+    w.append(weights)
+    b.append(bias)
+    return (w,b)
 
 def forward_pass(x,w,b,activation):
   a=[]
@@ -314,12 +321,12 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
 
   w=[]
   b=[]
-  w,b=make_layer(w,b,784,128,'random')
-  w,b=make_layer(w,b,128,128,'random')
-  w,b=make_layer(w,b,128,128,'random')
-  w,b=make_layer(w,b,128,10,'random')
+  w,b=make_layer(w,b,784,128,'xavier')
+  w,b=make_layer(w,b,128,128,'xavier')
+  w,b=make_layer(w,b,128,128,'xavier')
+  w,b=make_layer(w,b,128,10,'xavier')
   l=len(w)
-  iter=20
+  iter=5
   # print("Batch Gradient Descent: ")
   # batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'sigmoid','cross_entropy')
   # print("Batch Gradient Descent: ")
