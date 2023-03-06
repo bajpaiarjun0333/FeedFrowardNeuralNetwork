@@ -74,6 +74,10 @@ def forward_pass(x,w,b,activation):
   l=len(w)
   for i in range (l-1):
     a1=np.add(np.matmul(temp,w[i]),b[i])
+    if activation=='relu' and i==0:
+      for i in range(a1.shape[0]):
+        maxi=np.argmax(a1[i])
+        a1[i]=a1[i]/a1[i][maxi]
     h1=activations(activation,a1)
     a.append(a1)
     h.append(h1)
@@ -326,12 +330,12 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
   w,b=make_layer(w,b,128,128,'xavier')
   w,b=make_layer(w,b,128,10,'xavier')
   l=len(w)
-  iter=5
-  # print("Batch Gradient Descent: ")
-  # batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'sigmoid','cross_entropy')
-  # print("Batch Gradient Descent: ")
-  # print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
-  # print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
+  iter=8
+  print("Batch Gradient Descent: ")
+  batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'relu','cross_entropy')
+  print("Batch Gradient Descent: ")
+  print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'relu')))
+  print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'relu')))
   #print("Momentum Gradient Descent: ")
   #momentumGradientDescent(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
   #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
@@ -344,10 +348,10 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
   #rmsProp(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
   #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
   #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-  print("Adam Optimizer")
-  Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'tanh','cross_entropy')
-  print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'tanh')))
-  print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'tanh')))
+ # print("NAdam Optimizer")
+  #Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'relu','cross_entropy')
+  #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'relu')))
+  #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'relu')))
 
 architecture(x_train,y_train,x_test,y_test,10)
 
