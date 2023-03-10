@@ -54,8 +54,8 @@ def loss_function(loss_fn,yhat,y_train):
 
 def make_layer(w,b,input,output,initialization):
   if initialization=='random':
-    weights=np.random.uniform(-1,1,(input,output))
-    bias=np.random.uniform(-1,1,(1,output))
+    weights=np.random.uniform(-0.08,0.08,(input,output))
+    bias=np.random.uniform(-0.08,0.08,(1,output))
     w.append(weights)
     b.append(bias)
     return (w,b)
@@ -325,17 +325,16 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
 
   w=[]
   b=[]
-  w,b=make_layer(w,b,784,128,'xavier')
-  w,b=make_layer(w,b,128,128,'xavier')
-  w,b=make_layer(w,b,128,128,'xavier')
-  w,b=make_layer(w,b,128,10,'xavier')
+  w,b=make_layer(w,b,784,128,'random')
+  w,b=make_layer(w,b,128,128,'random')
+  w,b=make_layer(w,b,128,128,'random')
+  w,b=make_layer(w,b,128,10,'random')
   l=len(w)
   iter=8
-  #print("Batch Gradient Descent: ")
-  #batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'relu','cross_entropy')
-  #print("Batch Gradient Descent: ")
-  #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'relu')))
-  #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'relu')))
+  print("Batch Gradient Descent: ")
+  batchGrad(x_train,y_train,no_of_classes,w,b,l,iter,0.1,32,'relu','cross_entropy')
+  print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'relu')))
+  print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'relu')))
   #print("Momentum Gradient Descent: ")
   #momentumGradientDescent(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
   #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
@@ -348,10 +347,10 @@ def architecture(x_train,y_train,x_test,y_test,no_of_classes):
   #rmsProp(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,'sigmoid','cross_entropy')
   #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'sigmoid')))
   #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'sigmoid')))
-  print("NAdam Optimizer")
-  Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'tanh','cross_entropy')
-  print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'tanh')))
-  print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'tanh')))
+  #print("NAdam Optimizer")
+  #Nadam(x_train,y_train,no_of_classes,w,b,l,iter,0.01,32,0.9,0.999,'relu','cross_entropy')
+  #print("Train Accuracy: ",str(accuracy(x_train,y_train,w,b,'relu')))
+  #print("Test Accuracy: ",str(accuracy(x_test,y_test,w,b,'relu')))
 
 architecture(x_train,y_train,x_test,y_test,10)
 

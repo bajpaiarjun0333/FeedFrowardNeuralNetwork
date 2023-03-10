@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 438, in <module>
+    obj.architecture(x_train,y_train,x_val,y_val,iter,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 418, in architecture
+    self.adam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 334, in adam
+    self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 186, in onePass
+    self.forward_pass(x_train,activation)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 121, in forward_pass
+    a1=np.add(np.matmul(temp,self.w[l-1]),self.b[l-1])
+                             ~~~~~~^^^^^
+IndexError: list index out of range

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 445, in <module>
+    obj.architecture(x_train,y_train,x_val,y_val,iter,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 427, in architecture
+    self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 386, in Nadam
+    self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 194, in onePass
+    self.backward_pass(self.h[l-1],y_train,x_train,no_of_classes,activation)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 140, in backward_pass
+    el[i][y_train[i]]=1
+    ~~~~~^^^^^^^^^^^^
+IndexError: index 5 is out of bounds for axis 0 with size 5
