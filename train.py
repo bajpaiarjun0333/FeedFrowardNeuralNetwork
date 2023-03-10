@@ -25,7 +25,8 @@ default_params=dict(
     no_of_hidden_layers=3,
     no_of_neuron=128,
     initialization='xavier',
-    input_neuron=784,    
+    input_neuron=784, 
+    alpha=0.2   
 )
 
 no_of_classes=10
@@ -57,7 +58,7 @@ class NeuralNetwork:
         if activation=='sigmoid':
             return 1/(1+np.exp(-z))
         elif activation=='relu':
-            return np.maximum(0,z)
+            return z*(z>0)
         elif activation=='tanh':
             return (np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))
         elif activation=='softmax':
@@ -65,17 +66,17 @@ class NeuralNetwork:
             for i in range(z.shape[0]):
                 sum=0
                 maxi=np.argmax(z[i])
-                z[i]=np.exp(z[i]-z[i][max])
                 for j in range(z.shape[1]):
                     sum=sum+np.exp(z[i][j]-z[i][maxi])
-                y[i]=np.exp(z[i])/sum
+                z[i]=np.exp(z[i]-z[i][maxi])/sum
+                y[i]=z[i]
             return y
     
     def activations_derivative(self,activation,z):
         if activation=='sigmoid':
             return np.multiply((1/(1+np.exp(-z))),(1-(1/(1+np.exp(-z)))))
         elif activation=='relu':
-            relu_derivative=z*(z>0)
+            relu_derivative=np.maximum(0,z)
             relu_derivative[relu_derivative>0]=1
             return relu_derivative
         elif activation=='tanh':
@@ -110,8 +111,8 @@ class NeuralNetwork:
         layer.append(no_of_classes)
         if initialization=='random':
             for i in range(no_of_hidden_layers+1):
-                weights=np.random.uniform(-1,1,(layer[i],layer[i+1]))
-                bias=np.random.uniform(-1,1,(1,layer[i+1]))
+                weights=np.random.uniform(-0.5,0.5,(layer[i],layer[i+1]))
+                bias=np.random.uniform(-0.5,0.5,(1,layer[i+1]))
                 self.w.append(weights)
                 self.b.append(bias)
         if initialization=='xavier':
@@ -129,7 +130,7 @@ class NeuralNetwork:
         l=len(self.w)
         for i in range (l-1):
             a1=np.add(np.matmul(temp,self.w[i]),self.b[i])
-            if i==0:
+            if activation=='relu' and i==0:
                 for i in range(a1.shape[0]):
                     maxi=np.argmax(a1[i])
                     a1[i]=a1[i]/a1[i][maxi]
@@ -205,7 +206,7 @@ class NeuralNetwork:
         self.forward_pass(x_train,activation)
         self.backward_pass(self.h[l-1],y_train,x_train,no_of_classes,activation)
     
-    def batch(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn):
+    def batch(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         for i in range(iter):
@@ -217,19 +218,17 @@ class NeuralNetwork:
                     self.b[j]=self.b[j]-n*self.bd[l-1-j]
 
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
 
-    def momentum(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
+    def momentum(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
   
         moment=[]
@@ -250,18 +249,16 @@ class NeuralNetwork:
                     self.b[k]=self.b[k]-n*momentB[k]
   
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def nestrov(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
+    def nestrov(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         moment=[]
@@ -285,18 +282,16 @@ class NeuralNetwork:
                     self.b[k]=self.b[k]-momentB[k]
       
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def rmsProp(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn):
+    def rmsProp(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         momentW=[]
@@ -307,29 +302,26 @@ class NeuralNetwork:
             momentW.append(temp)
             momentB.append(temp2)
 
-        epsilon=1e-8
         for i in range(int(iter)):
             for j in range(len(data)):
                 self.onePass(data[j],ans[j],no_of_classes,l,n,activation)
                 for k in range (l):
                     momentW[k]=(momentW[k]*beta)+(1-beta)*np.square(self.wd[l-1-k])
                     momentB[k]=(momentB[k]*beta)+(1-beta)*np.square(self.bd[l-1-k])
-                    self.w[k]=self.w[k]-(n/np.sqrt(np.linalg.norm(momentW[k]+epsilon)))*self.wd[l-1-k]
-                    self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(momentB[k]+epsilon)))*self.bd[l-1-k]
+                    self.w[k]=self.w[k]-(n/np.sqrt(np.linalg.norm(momentW[k]+self.epsilon)))*self.wd[l-1-k]
+                    self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(momentB[k]+self.epsilon)))*self.bd[l-1-k]
   
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def adam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon):
+    def adam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
         mt_w=[]
@@ -364,18 +356,16 @@ class NeuralNetwork:
                     self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*mt_b_hat
             
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def Nadam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon):
+    def Nadam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
         mt_w=[]
         vt_w=[]
@@ -409,34 +399,32 @@ class NeuralNetwork:
                     self.b[k]=self.b[k]-(n/np.sqrt(np.linalg.norm(vt_b_hat+epsilon)))*(beta1*mt_b_hat+(((1-beta1)*self.bd[l-1-k])/(1-beta1**t)))
   
             self.forward_pass(x_train,activation)
-            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train)
+            loss_train=self.loss_function(loss_fn,self.h[l-1],y_train,alpha)
             self.forward_pass(x_val,activation)
-            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val)
+            loss_val=self.loss_function(loss_fn,self.h[l-1],y_val,alpha)
             acc_train=self.accuracy(x_train,y_train,activation)
             acc_val=self.accuracy(x_val,y_val,activation)
-            wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
-            print("Iteration Number: "+str(i)+" Train loss: "+str(loss_train))
-            print("Iteration Number: "+str(i)+" Validaion loss : "+str(loss_val))
+            #wandb.log({"train_accuracy":acc_train,"train_error":loss_train,"val_accuracy":acc_val,"val_error":loss_val})
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon):
+    def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha):
         self.w=[]
         self.b=[]
         self.make_layers(no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes)
         l=len(self.w)
         if optimizer=="batch":
-            self.batch(x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn)
+            self.batch(x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn,alpha)
         if optimizer=='momentum':
-            self.momentum(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn)
+            self.momentum(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha)
         if optimizer=='nestrov':
-            self.nestrov(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn)
+            self.nestrov(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha)
         if optimizer=='rmsProp':
-            self.rmsProp(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn)
+            self.rmsProp(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha)
         if optimizer=='adam':
-            self.adam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon)
+            self.adam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha)
         if optimizer=='Nadam':
-            self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon)
+            self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha)
 
 
 
@@ -451,7 +439,8 @@ no_of_hidden_layers=config.no_of_hidden_layers
 no_of_neuron=config.no_of_neuron
 initialization=config.initialization
 input_neuron=config.input_neuron
+alpha=config.alpha
 
 run.name='hl_'+str(no_of_hidden_layers)+'_bs_'+str(batchSize)+'_ac_'+activation
 
-obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon)
+obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha)
