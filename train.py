@@ -91,18 +91,16 @@ class NeuralNetwork:
 
         if loss_fn=='cross_entropy':
             loss=0
-            reg=0
             for i in range(y_train.shape[0]):
                 loss+=-((np.log2(yhat[i][y_train[i]])))
-            return (loss/y_train.shape[0])+reg
+            return (loss+reg)/y_train.shape[0]
         
         if loss_fn=='mean_square':
-            reg=0
             el=np.zeros((y_train.shape[0],yhat.shape[1]))
             for i in range (y_train.shape[0]):
                 el[i][y_train[i]]=1
 
-            return (np.sum(((yhat-el)**2))/(y_train.shape[0]))+reg
+            return ((np.sum(((yhat-el)**2)))+reg)/(y_train.shape[0])
 
     def make_layers(self,no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes):
         layer=[]

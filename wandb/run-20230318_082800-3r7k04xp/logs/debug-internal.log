@@ -1,0 +1,460 @@
+2023-03-18 08:28:00,725 INFO    StreamThr :237980 [internal.py:wandb_internal():87] W&B internal server running at pid: 237980, started at: 2023-03-18 08:28:00.725263
+2023-03-18 08:28:00,725 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status
+2023-03-18 08:28:00,740 INFO    WriterThread:237980 [datastore.py:open_for_write():85] open: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\run-3r7k04xp.wandb
+2023-03-18 08:28:00,750 DEBUG   SenderThread:237980 [sender.py:send():336] send: header
+2023-03-18 08:28:00,788 DEBUG   SenderThread:237980 [sender.py:send():336] send: run
+2023-03-18 08:28:01,437 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: check_version
+2023-03-18 08:28:01,437 INFO    SenderThread:237980 [dir_watcher.py:__init__():216] watching files in: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files
+2023-03-18 08:28:01,437 INFO    SenderThread:237980 [sender.py:_start_run_threads():1067] run started: 3r7k04xp with start time 1679108280.725263
+2023-03-18 08:28:01,437 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:28:01,437 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:28:01,437 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: check_version
+2023-03-18 08:28:01,480 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: run_start
+2023-03-18 08:28:02,440 DEBUG   HandlerThread:237980 [system_info.py:__init__():31] System info init
+2023-03-18 08:28:02,440 DEBUG   HandlerThread:237980 [system_info.py:__init__():46] System info init done
+2023-03-18 08:28:02,440 INFO    HandlerThread:237980 [system_monitor.py:start():151] Starting system monitor
+2023-03-18 08:28:02,454 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:28:02,454 INFO    SystemMonitor:237980 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-03-18 08:28:02,454 INFO    HandlerThread:237980 [system_monitor.py:probe():172] Collecting system info
+2023-03-18 08:28:02,456 INFO    SystemMonitor:237980 [interfaces.py:start():168] Started cpu
+2023-03-18 08:28:02,456 INFO    SystemMonitor:237980 [interfaces.py:start():168] Started disk
+2023-03-18 08:28:02,456 INFO    SystemMonitor:237980 [interfaces.py:start():168] Started gpu
+2023-03-18 08:28:02,472 INFO    SystemMonitor:237980 [interfaces.py:start():168] Started memory
+2023-03-18 08:28:02,503 INFO    SystemMonitor:237980 [interfaces.py:start():168] Started network
+2023-03-18 08:28:02,518 DEBUG   HandlerThread:237980 [system_info.py:probe():195] Probing system
+2023-03-18 08:28:02,518 DEBUG   HandlerThread:237980 [system_info.py:_probe_git():180] Probing git
+2023-03-18 08:28:02,518 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:02,597 DEBUG   HandlerThread:237980 [system_info.py:_probe_git():188] Probing git done
+2023-03-18 08:28:02,597 DEBUG   HandlerThread:237980 [system_info.py:probe():241] Probing system done
+2023-03-18 08:28:02,597 DEBUG   HandlerThread:237980 [system_monitor.py:probe():181] {'os': 'Windows-10-10.0.22621-SP0', 'python': '3.11.2', 'heartbeatAt': '2023-03-18T02:58:02.518921', 'startedAt': '2023-03-18T02:58:00.709609', 'docker': None, 'cuda': None, 'args': ('--activation=tanh', '--alpha=0.0001', '--batchSize=16', '--initialization=xavier', '--input_neuron=784', '--iter=10', '--loss_fn=cross_entropy', '--n=0.005', '--no_of_hidden_layers=4', '--no_of_neuron=128', '--optimizer=Nadam'), 'state': 'running', 'program': 'C:\\Users\\bajpa\\Desktop\\DocumentsFinal\\Project\\Deep Learning Feed Forward\\train.py', 'codePath': 'train.py', 'git': {'remote': 'https://github.com/bajpaiarjun0333/FeedFrowardNeuralNetwork.git', 'commit': '09b8bccfca3e2fca18b7ef91a6981dc90af12a52'}, 'email': 'bajpaiarjun0333@gmail.com', 'root': 'C:/Users/bajpa/Desktop/DocumentsFinal/Project/Deep Learning Feed Forward', 'host': 'DESKTOP-A9EKFSQ', 'username': 'bajpa', 'executable': 'C:\\Users\\bajpa\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 2208.0, 'min': 0.0, 'max': 2208.0}, 'cpu_freq_per_core': [{'current': 2208.0, 'min': 0.0, 'max': 2208.0}], 'disk': {'total': 315.69823837280273, 'used': 286.83870697021484}, 'gpu': 'GeForce GTX 1660 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'GeForce GTX 1660 Ti', 'memory_total': 6442450944}], 'memory': {'total': 7.847389221191406}}
+2023-03-18 08:28:02,597 INFO    HandlerThread:237980 [system_monitor.py:probe():182] Finished collecting system info
+2023-03-18 08:28:02,597 INFO    HandlerThread:237980 [system_monitor.py:probe():185] Publishing system info
+2023-03-18 08:28:02,597 DEBUG   HandlerThread:237980 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-03-18 08:28:02,597 DEBUG   HandlerThread:237980 [system_info.py:_save_pip():67] Saving pip packages done
+2023-03-18 08:28:02,597 INFO    HandlerThread:237980 [system_monitor.py:probe():187] Finished publishing system info
+2023-03-18 08:28:02,613 DEBUG   SenderThread:237980 [sender.py:send():336] send: files
+2023-03-18 08:28:02,613 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-03-18 08:28:02,613 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: stop_status
+2023-03-18 08:28:02,613 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: stop_status
+2023-03-18 08:28:02,912 DEBUG   SenderThread:237980 [sender.py:send():336] send: telemetry
+2023-03-18 08:28:02,912 DEBUG   SenderThread:237980 [sender.py:send():336] send: telemetry
+2023-03-18 08:28:02,912 DEBUG   SenderThread:237980 [sender.py:send():336] send: run
+2023-03-18 08:28:03,257 INFO    SenderThread:237980 [sender.py:send_run():944] updated run: 3r7k04xp
+2023-03-18 08:28:03,461 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\config.yaml
+2023-03-18 08:28:03,461 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-metadata.json
+2023-03-18 08:28:03,461 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\requirements.txt
+2023-03-18 08:28:03,492 INFO    wandb-upload_0:237980 [upload_job.py:push():138] Uploaded file C:\Users\bajpa\AppData\Local\Temp\tmplg8rxf0uwandb\dp8c7r35-wandb-metadata.json
+2023-03-18 08:28:05,127 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:06,272 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:07,701 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:10,275 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:11,295 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:12,849 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:15,425 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:16,321 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:17,639 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:17,639 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:18,001 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:20,582 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:21,346 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:22,665 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:23,174 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:25,796 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:26,393 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:27,697 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:28,388 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:30,539 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:28:30,539 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:28:30,539 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:28:30,539 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:28:30,774 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:28:30,774 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_created():275] file/dir created: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:28:30,979 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:31,561 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:32,755 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:32,787 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:28:32,787 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\config.yaml
+2023-03-18 08:28:33,566 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:36,135 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:36,905 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:37,785 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:38,713 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:41,415 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:41,933 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:42,812 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:44,016 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:46,584 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:46,961 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:47,841 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:49,162 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:51,772 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:52,008 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:52,882 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:54,344 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:56,938 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:57,079 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:28:57,937 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:28:59,513 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:28:59,576 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:28:59,576 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:28:59,576 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:28:59,576 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:29:00,078 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:29:01,083 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:29:02,094 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:02,512 DEBUG   SystemMonitor:237980 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-03-18 08:29:02,512 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:29:02,512 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:03,015 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:04,681 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:07,258 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:07,540 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:08,042 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:09,836 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:12,414 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:12,571 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:13,073 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:14,989 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:17,565 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:17,597 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:18,099 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:20,314 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:22,641 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:22,939 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:23,159 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:25,532 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:27,669 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:28,141 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:28,141 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:29:28,141 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:29:28,156 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:29:28,156 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:29:28,251 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:28,282 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:29:29,288 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:29:30,734 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:32,525 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:29:33,295 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:33,310 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:33,530 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:35,895 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:38,305 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:38,463 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:38,556 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:41,036 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:43,329 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:43,580 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:43,611 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:46,188 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:48,357 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:48,608 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:48,812 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:51,390 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:53,386 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:53,653 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:29:53,967 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:56,293 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:29:56,293 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:29:56,293 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:29:56,293 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:29:56,561 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:56,671 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:29:56,671 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:29:58,430 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:29:59,231 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:29:59,309 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:01,808 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:02,530 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:30:03,458 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:04,369 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:04,541 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:06,944 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:08,482 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:09,519 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:09,566 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:12,095 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:13,507 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:14,607 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:14,670 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:17,262 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:18,534 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:19,635 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:19,839 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:22,448 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:23,642 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:24,256 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:30:24,256 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:30:24,256 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:30:24,256 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:30:25,024 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:25,074 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:30:25,074 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:30:25,276 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:27,585 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:28,717 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:30,162 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:30,303 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:32,533 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:30:32,738 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:33,710 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:35,298 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:35,549 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:37,999 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:38,769 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:40,576 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:40,576 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:43,132 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:43,791 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:45,599 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:45,740 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:48,364 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:48,866 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:50,628 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:50,958 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:52,262 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:30:52,262 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:30:52,262 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:30:52,262 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:30:52,451 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:30:53,457 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:30:53,535 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:53,975 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:30:56,121 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:56,301 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:30:58,676 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:30:59,005 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:01,251 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:01,330 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:02,540 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:31:03,832 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:04,033 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:06,406 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:06,563 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:08,982 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:09,061 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:11,560 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:11,591 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:14,122 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:14,185 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:16,619 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:16,918 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:19,228 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:19,480 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:20,360 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:31:20,360 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:31:20,360 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:31:20,360 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:31:20,864 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:31:20,864 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:31:22,059 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:22,388 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:24,289 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:24,644 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:27,213 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:27,417 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:29,318 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:29,790 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:32,374 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:32,447 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:32,541 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:31:34,348 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:34,945 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:37,519 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:37,565 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:39,372 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:40,132 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:42,594 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:42,708 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:44,497 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:45,295 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:47,624 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:47,860 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:48,206 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:31:48,206 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:31:48,206 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:31:48,206 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:31:48,582 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:31:49,462 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:49,604 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:31:50,436 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:53,006 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:53,247 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:54,487 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:31:55,682 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:58,258 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:31:58,274 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:31:59,515 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:00,851 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:02,548 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:32:03,432 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:03,555 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:04,545 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:05,989 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:08,566 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:08,582 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:09,572 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:11,133 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:13,612 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:13,738 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:14,680 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:16,172 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:32:16,172 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:32:16,172 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:32:16,172 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:32:16,313 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:16,941 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:32:16,941 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:32:18,888 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:19,202 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:19,705 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:21,464 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:24,040 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:24,228 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:24,731 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:26,619 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:29,228 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:29,259 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:29,762 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:31,822 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:32,561 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:32:34,493 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:34,572 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:34,792 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:34,792 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:37,102 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:39,600 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:39,662 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:39,819 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: keepalive
+2023-03-18 08:32:42,257 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:44,239 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: partial_history
+2023-03-18 08:32:44,239 DEBUG   SenderThread:237980 [sender.py:send():336] send: history
+2023-03-18 08:32:44,239 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: summary_record
+2023-03-18 08:32:44,239 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:32:44,289 DEBUG   SenderThread:237980 [sender.py:send():336] send: exit
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:send_exit():559] handling exit code: 0
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:send_exit():561] handling runtime: 282
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:send_exit():567] send defer
+2023-03-18 08:32:44,289 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,289 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 0
+2023-03-18 08:32:44,289 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 0
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 1
+2023-03-18 08:32:44,289 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,289 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 1
+2023-03-18 08:32:44,289 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 1
+2023-03-18 08:32:44,289 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 2
+2023-03-18 08:32:44,289 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,289 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 2
+2023-03-18 08:32:44,289 INFO    HandlerThread:237980 [system_monitor.py:finish():161] Stopping system monitor
+2023-03-18 08:32:44,301 DEBUG   SystemMonitor:237980 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-03-18 08:32:44,301 DEBUG   SystemMonitor:237980 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-03-18 08:32:44,301 INFO    HandlerThread:237980 [interfaces.py:finish():175] Joined cpu
+2023-03-18 08:32:44,301 INFO    HandlerThread:237980 [interfaces.py:finish():175] Joined disk
+2023-03-18 08:32:44,822 ERROR   gpu       :237980 [interfaces.py:monitor():129] Failed to sample metric: Not Supported
+2023-03-18 08:32:44,890 INFO    HandlerThread:237980 [interfaces.py:finish():175] Joined gpu
+2023-03-18 08:32:44,890 INFO    HandlerThread:237980 [interfaces.py:finish():175] Joined memory
+2023-03-18 08:32:44,890 INFO    HandlerThread:237980 [interfaces.py:finish():175] Joined network
+2023-03-18 08:32:44,890 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,890 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 2
+2023-03-18 08:32:44,890 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 3
+2023-03-18 08:32:44,890 DEBUG   SenderThread:237980 [sender.py:send():336] send: stats
+2023-03-18 08:32:44,890 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,890 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 3
+2023-03-18 08:32:44,890 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 3
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 4
+2023-03-18 08:32:44,900 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,900 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 4
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 4
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 5
+2023-03-18 08:32:44,900 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,900 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 5
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send():336] send: summary
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 5
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 6
+2023-03-18 08:32:44,900 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,900 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 6
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 6
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 7
+2023-03-18 08:32:44,900 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: status_report
+2023-03-18 08:32:44,900 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:44,900 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 7
+2023-03-18 08:32:44,900 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:44,900 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 7
+2023-03-18 08:32:45,136 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:32:45,136 INFO    Thread-17 :237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:32:45,310 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-18 08:32:46,746 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 8
+2023-03-18 08:32:46,746 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: poll_exit
+2023-03-18 08:32:46,746 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:46,746 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 8
+2023-03-18 08:32:46,746 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:46,746 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 8
+2023-03-18 08:32:46,746 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 9
+2023-03-18 08:32:46,746 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:46,746 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 9
+2023-03-18 08:32:46,746 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:46,746 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 9
+2023-03-18 08:32:46,746 INFO    SenderThread:237980 [dir_watcher.py:finish():362] shutting down directory watcher
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:_on_file_modified():292] file/dir modified: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():392] scan: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():406] scan save: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\config.yaml config.yaml
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():406] scan save: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log output.log
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():406] scan save: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\requirements.txt requirements.txt
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():406] scan save: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-metadata.json wandb-metadata.json
+2023-03-18 08:32:47,152 INFO    SenderThread:237980 [dir_watcher.py:finish():406] scan save: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json wandb-summary.json
+2023-03-18 08:32:47,167 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 10
+2023-03-18 08:32:47,167 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:47,167 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 10
+2023-03-18 08:32:47,167 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:47,167 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 10
+2023-03-18 08:32:47,167 INFO    SenderThread:237980 [file_pusher.py:finish():162] shutting down file pusher
+2023-03-18 08:32:47,985 INFO    wandb-upload_0:237980 [upload_job.py:push():138] Uploaded file C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\config.yaml
+2023-03-18 08:32:48,033 INFO    wandb-upload_3:237980 [upload_job.py:push():138] Uploaded file C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\wandb-summary.json
+2023-03-18 08:32:48,033 INFO    wandb-upload_2:237980 [upload_job.py:push():138] Uploaded file C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\requirements.txt
+2023-03-18 08:32:48,080 INFO    wandb-upload_1:237980 [upload_job.py:push():138] Uploaded file C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\files\output.log
+2023-03-18 08:32:48,300 INFO    Thread-16 (_thread_body):237980 [sender.py:transition_state():587] send defer: 11
+2023-03-18 08:32:48,300 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:48,300 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 11
+2023-03-18 08:32:48,300 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:48,300 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 11
+2023-03-18 08:32:48,300 INFO    SenderThread:237980 [file_pusher.py:join():167] waiting for file pusher
+2023-03-18 08:32:48,300 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 12
+2023-03-18 08:32:48,300 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:48,300 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 12
+2023-03-18 08:32:48,300 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:48,300 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 12
+2023-03-18 08:32:49,201 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 13
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:49,201 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 13
+2023-03-18 08:32:49,201 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:49,201 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 13
+2023-03-18 08:32:49,201 INFO    SenderThread:237980 [sender.py:transition_state():587] send defer: 14
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: defer
+2023-03-18 08:32:49,201 INFO    HandlerThread:237980 [handler.py:handle_request_defer():170] handle defer: 14
+2023-03-18 08:32:49,201 DEBUG   SenderThread:237980 [sender.py:send():336] send: final
+2023-03-18 08:32:49,201 DEBUG   SenderThread:237980 [sender.py:send():336] send: footer
+2023-03-18 08:32:49,201 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: defer
+2023-03-18 08:32:49,201 INFO    SenderThread:237980 [sender.py:send_request_defer():583] handle sender defer: 14
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: poll_exit
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: server_info
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: get_summary
+2023-03-18 08:32:49,201 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: sampled_history
+2023-03-18 08:32:49,214 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: poll_exit
+2023-03-18 08:32:49,214 DEBUG   SenderThread:237980 [sender.py:send_request():363] send_request: server_info
+2023-03-18 08:32:49,795 INFO    MainThread:237980 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2023-03-18 08:32:49,795 INFO    MainThread:237980 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2023-03-18 08:32:49,803 INFO    MainThread:237980 [wandb_run.py:_footer_sync_info():3398] logging synced files
+2023-03-18 08:32:49,803 DEBUG   HandlerThread:237980 [handler.py:handle_request():144] handle_request: shutdown
+2023-03-18 08:32:49,803 INFO    HandlerThread:237980 [handler.py:finish():841] shutting down handler
+2023-03-18 08:32:50,221 INFO    WriterThread:237980 [datastore.py:close():299] close: C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230318_082800-3r7k04xp\run-3r7k04xp.wandb
+2023-03-18 08:32:50,805 INFO    SenderThread:237980 [sender.py:finish():1493] shutting down sender
+2023-03-18 08:32:50,805 INFO    SenderThread:237980 [file_pusher.py:finish():162] shutting down file pusher
+2023-03-18 08:32:50,805 INFO    SenderThread:237980 [file_pusher.py:join():167] waiting for file pusher
