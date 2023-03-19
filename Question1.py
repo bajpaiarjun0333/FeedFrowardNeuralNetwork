@@ -24,4 +24,4 @@ for i in range(len(X_train)):
     collection.append(X_train[i])
     label.append(categories[Y_train[i]])
 
-wandb.log({"Question 1-Sample Images": [wandb.Image(img, caption=lbl) for img,lbl in zip(collection,label)]})
+wandb.log({"Question 1-Sample Images on Fashion Mnist": [wandb.Image(img, caption=lbl) for img,lbl in zip(collection,label)]})

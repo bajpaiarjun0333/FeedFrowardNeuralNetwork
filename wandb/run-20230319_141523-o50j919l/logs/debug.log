@@ -1,0 +1,28 @@
+2023-03-19 14:15:23,780 INFO    MainThread:155088 [wandb_setup.py:_flush():68] Configure stats pid to 155088
+2023-03-19 14:15:23,780 INFO    MainThread:155088 [wandb_setup.py:_flush():68] Loading settings from C:\Users\bajpa\.config\wandb\settings
+2023-03-19 14:15:23,780 INFO    MainThread:155088 [wandb_setup.py:_flush():68] Loading settings from C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\settings
+2023-03-19 14:15:23,780 INFO    MainThread:155088 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True', 'entity': 'cs22m020', 'project': 'DeepLearning', 'sweep_id': '75luq6lg', 'root_dir': 'C:\\Users\\bajpa\\Desktop\\DocumentsFinal\\Project\\Deep Learning Feed Forward', 'run_id': 'o50j919l', 'sweep_param_path': 'C:\\Users\\bajpa\\Desktop\\DocumentsFinal\\Project\\Deep Learning Feed Forward\\wandb\\sweep-75luq6lg\\config-o50j919l.yaml'}
+2023-03-19 14:15:23,781 INFO    MainThread:155088 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program_relpath': 'train.py', 'program': 'C:\\Users\\bajpa\\Desktop\\DocumentsFinal\\Project\\Deep Learning Feed Forward\\train.py'}
+2023-03-19 14:15:23,781 INFO    MainThread:155088 [wandb_init.py:_log_setup():492] Logging user logs to C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230319_141523-o50j919l\logs\debug.log
+2023-03-19 14:15:23,781 INFO    MainThread:155088 [wandb_init.py:_log_setup():493] Logging internal logs to C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\wandb\run-20230319_141523-o50j919l\logs\debug-internal.log
+2023-03-19 14:15:23,782 INFO    MainThread:155088 [wandb_init.py:init():532] calling init triggers
+2023-03-19 14:15:23,783 INFO    MainThread:155088 [wandb_init.py:init():538] wandb.init called with sweep_config: {'activation': 'relu', 'alpha': 0, 'batchSize': 32, 'initialization': 'xavier', 'input_neuron': 784, 'iter': 5, 'loss_fn': 'cross_entropy', 'n': 0.01, 'no_of_hidden_layers': 3, 'no_of_neuron': 64, 'optimizer': 'adam'}
+config: {'iter': 10, 'batchSize': 64, 'optimizer': 'nadam', 'n': 0.01, 'activation': 'sigmoid', 'no_of_hidden_layers': 2, 'no_of_neuron': 128, 'initialization': 'xavier', 'input_neuron': 784, 'alpha': 0.0001, 'loss_fn': 'cross_entropy'}
+2023-03-19 14:15:23,783 INFO    MainThread:155088 [wandb_init.py:init():588] starting backend
+2023-03-19 14:15:23,783 INFO    MainThread:155088 [wandb_init.py:init():592] setting up manager
+2023-03-19 14:15:23,799 INFO    MainThread:155088 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=spawn, using: spawn
+2023-03-19 14:15:23,822 INFO    MainThread:155088 [wandb_init.py:init():599] backend started and connected
+2023-03-19 14:15:23,844 INFO    MainThread:155088 [wandb_run.py:_config_callback():1250] config_cb None None {'activation': 'relu', 'alpha': 0, 'batchSize': 32, 'initialization': 'xavier', 'input_neuron': 784, 'iter': 5, 'loss_fn': 'cross_entropy', 'n': 0.01, 'no_of_hidden_layers': 3, 'no_of_neuron': 64, 'optimizer': 'adam'}
+2023-03-19 14:15:23,849 INFO    MainThread:155088 [wandb_init.py:init():687] updated telemetry
+2023-03-19 14:15:23,939 INFO    MainThread:155088 [wandb_init.py:init():727] communicating run to backend with 60.0 second timeout
+2023-03-19 14:15:24,640 INFO    MainThread:155088 [wandb_run.py:_on_init():2134] communicating current version
+2023-03-19 14:15:25,440 INFO    MainThread:155088 [wandb_run.py:_on_init():2143] got version response upgrade_message: "wandb version 0.14.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-03-19 14:15:25,440 INFO    MainThread:155088 [wandb_init.py:init():775] starting run threads in backend
+2023-03-19 14:15:26,675 INFO    MainThread:155088 [wandb_run.py:_console_start():2114] atexit reg
+2023-03-19 14:15:26,677 INFO    MainThread:155088 [wandb_run.py:_redirect():1969] redirect: 3
+2023-03-19 14:15:26,678 INFO    MainThread:155088 [wandb_run.py:_redirect():2034] Wrapping output streams.
+2023-03-19 14:15:26,678 INFO    MainThread:155088 [wandb_run.py:_redirect():2059] Redirects installed.
+2023-03-19 14:15:26,680 INFO    MainThread:155088 [wandb_init.py:init():817] run started, returning control to user process
+2023-03-19 14:16:26,809 INFO    MainThread:155088 [wandb_run.py:_config_callback():1250] config_cb ('_wandb', 'visualize', 'my_conf_mat_id') {'panel_type': 'Vega2', 'panel_config': {'panelDefId': 'wandb/confusion_matrix/v1', 'fieldSettings': {'Actual': 'Actual', 'Predicted': 'Predicted', 'nPredictions': 'nPredictions'}, 'stringSettings': {'title': ''}, 'transform': {'name': 'tableWithLeafColNames'}, 'userQuery': {'queryFields': [{'name': 'runSets', 'args': [{'name': 'runSets', 'value': '${runSets}'}], 'fields': [{'name': 'id', 'fields': []}, {'name': 'name', 'fields': []}, {'name': '_defaultColorIndex', 'fields': []}, {'name': 'summaryTable', 'args': [{'name': 'tableKey', 'value': 'my_conf_mat_id_table'}], 'fields': []}]}]}}} None
+2023-03-19 14:16:39,109 WARNING MsgRouterThr:155088 [router.py:message_loop():77] message_loop has been closed

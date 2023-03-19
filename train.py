@@ -2,45 +2,183 @@ import numpy as np
 import pandas as pd
 import math
 import wandb
+import argparse
+import os
 from sklearn.model_selection import train_test_split
 
-#wandb.login()
+##########################################################   ARG PARSE #########################################################
 
-#dataset loading 
-from keras.datasets import fashion_mnist
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+
+
+
+
+os.environ['WAND_NOTEBOOK_NAME']='train.py'
+
+parser=argparse.ArgumentParser()
+
+parser.add_argument("-wp","--wandb_project",type=str, default="DeepLearning")
+
+parser.add_argument("-we","--wandb_entity", type=str, default="cs22m020")
+
+parser.add_argument("-d","--dataset", type=str,choices=["fashion_mnist","mnist"],  default="fashion_mnist")
+
+parser.add_argument("-e","--epochs",type=int,default=10)
+
+parser.add_argument("-b","--batch_size",type=int,default=64)
+
+parser.add_argument("-l","--loss",choices=["mean_square", "cross_entropy"],default="cross_entropy")
+
+parser.add_argument("-o","--optimizer",choices=["batch","momentum","nestrov","rmsProp","adam","Nadam"],default="Nadam")
+
+parser.add_argument("-lr","--learning_rate",type=float,default=0.01)
+
+parser.add_argument("-a","--activation",choices=["sigmoid", "tanh", "relu"],default="sigmoid")
+
+parser.add_argument("-sz","--hidden_size",type=int,default=128)
+
+parser.add_argument("-nhl","--num_layers",type=int,default=2)
+
+parser.add_argument("-w_i", "--weight_init",choices=["random", "xavier"],default="xavier")
+
+parser.add_argument("-eps", "--epsilon", type=float , default = 1e-10)
+
+parser.add_argument("-beta2","--beta2",type=float, default=0.999)
+
+parser.add_argument("-beta1","--beta1",type=float, default=0.9)
+
+parser.add_argument("-beta","--beta",type=float, default=0.9)
+
+parser.add_argument("-w_d","--weight_decay",type=float, default=0.0001)
+
+parser.add_argument("-m","--momentum",type=float, default=0.9)
+
+args = parser.parse_args()
+
+wandb_project = args.wandb_project
+
+wandb_entity = args.wandb_entity
+
+iter=args.epochs
+
+batchSize=args.batch_size
+
+optimizer=args.optimizer
+
+n=args.learning_rate
+
+activation=args.activation
+
+no_of_hidden_layers=args.num_layers
+
+no_of_neuron=args.hidden_size
+
+initialization=args.weight_init
+
+input_neuron=784
+
+alpha=args.weight_decay
+
+loss_fn=args.loss
+
+no_of_classes=10
+
+epsilon=args.epsilon
+
+beta=args.beta
+
+beta1=args.beta1
+
+beta2=args.beta2
+
+momentum=args.momentum
+
+dataset=args.dataset
+
+run=wandb.init(project=wandb_project,entity=wandb_entity,reinit='true')
+
+
+
+
+
+##########################################################    END       #########################################################
+
+
+##########################################################  WandB Sweep ##########################################################
+
+
+
+
+
+# default_params=dict(
+#     iter=10,
+#     batchSize=64,
+#     optimizer='nadam',
+#     n=0.01,
+#     activation='sigmoid',
+#     no_of_hidden_layers=2,
+#     no_of_neuron=128,
+#     initialization='xavier',
+#     input_neuron=784, 
+#     alpha=0.0001,
+#     loss_fn='cross_entropy'
+# )
+
+# no_of_classes=10
+# epsilon=1e-10
+# beta=0.9
+# beta1=0.9
+# beta2=0.999
+# momentum=0.9
+# dataset="fashion_mnist"
+
+# run=wandb.init(config=default_params,project='Deep Learning',entity='cs22m020',reinit='true')
+# config=wandb.config
+
+# iter=config.iter
+# batchSize=config.batchSize
+# optimizer=config.optimizer
+# n=config.n
+# activation=config.activation
+# no_of_hidden_layers=config.no_of_hidden_layers
+# no_of_neuron=config.no_of_neuron
+# initialization=config.initialization
+# input_neuron=config.input_neuron
+# alpha=config.alpha
+# loss_fn=config.loss_fn
+
+# run.name='hl_'+str(no_of_hidden_layers)+'_bs_'+str(batchSize)+'_ac_'+str(activation)+' iter '+str(iter)+' neuron '+str(no_of_neuron)+' opt '+str(optimizer)+ ' eta '+str(n) +' alpha '+str(alpha)+' ini '+str(initialization)
+
+
+
+
+
+
+##################################################     WandB and Sweep End    ###############################################
+
+
+
+#Creating Placeholders 
+x_train=None
+x_test=None
+y_train=None
+y_test=None
+
+#Loading the dataset
+if dataset=="fashion_mnist":
+    from keras.datasets import fashion_mnist
+    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+elif dataset=="mnist":
+    from keras.datasets import mnist
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+#Reshaping and normalizing the dataset
 x_train=x_train.reshape(x_train.shape[0],(x_train.shape[1]*x_train.shape[2]))
 x_test=x_test.reshape(x_test.shape[0],(x_test.shape[1]*x_test.shape[2]))
 x_train=x_train/255
 x_test=x_test/255
-#create validation set also
+
+#create validation dataset
 x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.1, random_state=0)
-
-default_params=dict(
-    iter=10,
-    batchSize=32,
-    optimizer='nadam',
-    n=0.01,
-    activation='sigmoid',
-    no_of_hidden_layers=3,
-    no_of_neuron=128,
-    initialization='xavier',
-    input_neuron=784, 
-    alpha=0.0001,
-    loss_fn='cross_entropy'
-)
-
-no_of_classes=10
-epsilon=1e-10
-beta=0.9
-beta1=0.9
-beta2=0.999
-
-run=wandb.init(config=default_params,project='Deep Learning',entity='cs22m020',reinit='true')
-config=wandb.config
-
-
-
 
 class NeuralNetwork:
     def __init__(self):
@@ -103,6 +241,7 @@ class NeuralNetwork:
             return ((np.sum(((yhat-el)**2)))+reg)/(y_train.shape[0])
 
     def make_layers(self,no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes):
+        np.random.seed(5)
         layer=[]
         layer.append(input_neuron)
         for i in range(no_of_hidden_layers):
@@ -207,6 +346,26 @@ class NeuralNetwork:
                 count=count+1
         return ((x_test.shape[0]-count)/y_test.shape[0])
     
+    ############################################################################################################################################################
+
+    def predict(self,x_test,y_test,activation):
+        self.forward_pass(x_test,activation)
+        l=len(self.w)
+        ypred=np.argmax(self.h[l-1],axis=1)
+        count=0
+        for i in range(y_test.shape[0]):
+            if ypred[i]!=y_test[i]:
+                count=count+1
+
+        
+        #confusion matrix
+        labels=['T-shirt/top','Trouser','Pullover','Dress','Coat','Sandal','Shirt','Sneaker','Bag','Ankle boot']
+        wandb.log({"my_conf_mat_id" : wandb.plot.confusion_matrix(preds=ypred, y_true=y_test,class_names=labels)})
+
+        print("Test Accuracy: "+str(((x_test.shape[0]-count)/y_test.shape[0])))
+    
+    ###########################################################################################################################################################
+
     def createBatches(self,x_train,y_train,batchSize):
         data=[]
         ans=[]
@@ -438,7 +597,7 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
-    def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha):
+    def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha,momentum):
         self.w=[]
         self.b=[]
         self.make_layers(no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes)
@@ -446,7 +605,7 @@ class NeuralNetwork:
         if optimizer=="batch":
             self.batch(x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn,alpha)
         if optimizer=='momentum':
-            self.momentum(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha)
+            self.momentum(x_train,y_train,no_of_classes,l,iter,n,batchSize,momentum,activation,loss_fn,alpha)
         if optimizer=='nestrov':
             self.nestrov(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha)
         if optimizer=='rmsProp':
@@ -459,18 +618,5 @@ class NeuralNetwork:
 
 obj=NeuralNetwork()
 
-iter=config.iter
-batchSize=config.batchSize
-optimizer=config.optimizer
-n=config.n
-activation=config.activation
-no_of_hidden_layers=config.no_of_hidden_layers
-no_of_neuron=config.no_of_neuron
-initialization=config.initialization
-input_neuron=config.input_neuron
-alpha=config.alpha
-loss_fn=config.loss_fn
-
-run.name='hl_'+str(no_of_hidden_layers)+'_bs_'+str(batchSize)+'_ac_'+activation
-
-obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha)
+obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha,momentum)
+obj.predict(x_test,y_test,activation)
