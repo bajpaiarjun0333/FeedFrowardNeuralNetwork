@@ -1,0 +1,39 @@
+Iteration Number: 0 Train Loss : 0.6975781975134627
+Iteration Number: 0 Validation Loss : 0.6972943592919226
+Iteration Number: 0 Train Accurcy : 0.8285740740740741
+Iteration Number: 0 Validaion Accuracy: 0.8343333333333334
+Iteration Number: 1 Train Loss : 0.6049526927450706
+Iteration Number: 1 Validation Loss : 0.6117911421403817
+Iteration Number: 1 Train Accurcy : 0.8500740740740741
+Iteration Number: 1 Validaion Accuracy: 0.8506666666666667
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.752.0_x64__qbz5n2kfra8p0\Lib\runpy.py", line 198, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.752.0_x64__qbz5n2kfra8p0\Lib\runpy.py", line 88, in _run_code
+    exec(code, run_globals)
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher/../..\debugpy\__main__.py", line 39, in <module>
+    cli.main()
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher/../..\debugpy/..\debugpy\server\cli.py", line 430, in main
+    run()
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\adapter/../..\debugpy\launcher/../..\debugpy/..\debugpy\server\cli.py", line 284, in run_file
+    runpy.run_path(target, run_name="__main__")
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py", line 321, in run_path
+    return _run_module_code(code, init_globals, run_name,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py", line 135, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "c:\Users\bajpa\.vscode\extensions\ms-python.python-2023.4.1\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py", line 124, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 648, in <module>
+    obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha,momentum)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 643, in architecture
+    self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 600, in Nadam
+    self.onePass(data[j],ans[j],no_of_classes,l,n,activation,loss_fn,alpha)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 400, in onePass
+    self.backward_pass(self.h[l-1],y_train,x_train,no_of_classes,activation,loss_fn,alpha)
+  File "C:\Users\bajpa\Desktop\DocumentsFinal\Project\Deep Learning Feed Forward\train.py", line 335, in backward_pass
+    wi=np.matmul(q,self.ad[len(self.ad)-1])/x_train.shape[0]
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

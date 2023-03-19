@@ -191,6 +191,7 @@ class NeuralNetwork:
         self.hd=[]
         self.bd=[]
 
+    #collection of all the activation function implementation
 
     def activations(self,activation,z):
         if activation=='sigmoid':
@@ -210,6 +211,8 @@ class NeuralNetwork:
                 y[i]=z[i]
             return y
     
+    #collection of all the activation function derivative
+
     def activations_derivative(self,activation,z):
         if activation=='sigmoid':
             return np.multiply((1/(1+np.exp(-z))),(1-(1/(1+np.exp(-z)))))
@@ -221,6 +224,8 @@ class NeuralNetwork:
             y=(np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))
             return 1-np.square(y)
         
+    #collection of all the loss function implementation
+
     def loss_function(self,loss_fn,yhat,y_train,alpha):
         reg=0
         for i in range(len(self.w)):
@@ -239,6 +244,8 @@ class NeuralNetwork:
                 el[i][y_train[i]]=1
 
             return ((np.sum(((yhat-el)**2)))+reg)/(y_train.shape[0])
+
+    #make layer function is used to implement the two initialization of weight initialization i.e xavier and random
 
     def make_layers(self,no_of_hidden_layers,no_of_neuron,input_neuron,initialization,no_of_classes):
         np.random.seed(5)
@@ -261,6 +268,8 @@ class NeuralNetwork:
                 self.w.append(weights)
                 self.b.append(bias)
 
+    #collection of the forward pass of feed forward neural network
+
     def forward_pass(self,x,activation):
         self.a=[]
         self.h=[]
@@ -280,6 +289,8 @@ class NeuralNetwork:
         h1=self.activations('softmax',a1)
         self.a.append(a1)
         self.h.append(h1)
+
+    #implementation of the backward propagation algorithm. The derivative is calculated based on the loss function
     
     def backward_pass(self,yhat,y_train,x_train,no_of_classes,activation,loss_fn,alpha):
         self.wd=[]
@@ -333,9 +344,10 @@ class NeuralNetwork:
             self.bd.append(bi)
         
         for i in range(len(self.w)):
-            self.wd[len(self.w)-1-i]=self.wd[len(self.w)-1-i]-alpha*self.w[i]
+            self.wd[len(self.w)-1-i]-=alpha*self.w[i]
         
-    
+    #Function to calculate accuracy of the dataset
+
     def accuracy(self,x_test,y_test,activation):
         self.forward_pass(x_test,activation)
         l=len(self.w)
@@ -346,7 +358,7 @@ class NeuralNetwork:
                 count=count+1
         return ((x_test.shape[0]-count)/y_test.shape[0])
     
-    ############################################################################################################################################################
+    #This function is used to make the final prediction on the test data
 
     def predict(self,x_test,y_test,activation):
         self.forward_pass(x_test,activation)
@@ -364,7 +376,7 @@ class NeuralNetwork:
 
         print("Test Accuracy: "+str(((x_test.shape[0]-count)/y_test.shape[0])))
     
-    ###########################################################################################################################################################
+    #Function to create the batches out of the original data
 
     def createBatches(self,x_train,y_train,batchSize):
         data=[]
@@ -381,10 +393,14 @@ class NeuralNetwork:
             ans.append(batch_ans)
         return data,ans
     
+    #function to implement one combination of the forward and backward pass
+
     def onePass(self,x_train,y_train,no_of_classes,l,n,activation,loss_fn,alpha):
         self.forward_pass(x_train,activation)
         self.backward_pass(self.h[l-1],y_train,x_train,no_of_classes,activation,loss_fn,alpha)
     
+    #Function to implement stochastic gradient descent
+
     def batch(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
@@ -408,6 +424,7 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Function to implement momentum based gradient descent
 
     def momentum(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
@@ -441,6 +458,8 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Function to implement nestrov gradient descent
+    
     def nestrov(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
@@ -476,6 +495,8 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Function to implement rmsProp gradient descent
+
     def rmsProp(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta,activation,loss_fn,alpha,epsilon):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
@@ -508,6 +529,8 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Function to implement adam gradient descent
+
     def adam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
 
@@ -552,6 +575,8 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Function to implement Nadam Gradient descent
+
     def Nadam(self,x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha):
         data,ans=self.createBatches(x_train,y_train,batchSize)
         mt_w=[]
@@ -597,6 +622,8 @@ class NeuralNetwork:
             print("Iteration Number: "+str(i)+" Train Accurcy : "+str(acc_train))
             print("Iteration Number: "+str(i)+" Validaion Accuracy: "+str(acc_val))
             
+    #Main Function to implement the functionality
+
     def architecture(self,x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha,momentum):
         self.w=[]
         self.b=[]
@@ -615,8 +642,9 @@ class NeuralNetwork:
         if optimizer=='Nadam':
             self.Nadam(x_train,y_train,no_of_classes,l,iter,n,batchSize,beta1,beta2,activation,loss_fn,epsilon,alpha)
 
+#creating the object and calling
+
 
 obj=NeuralNetwork()
-
 obj.architecture(x_train,y_train,x_val,y_val,no_of_classes,no_of_hidden_layers,no_of_neuron,input_neuron,batchSize,initialization,loss_fn,activation,optimizer,n,iter,beta,beta1,beta2,epsilon,alpha,momentum)
 obj.predict(x_test,y_test,activation)
